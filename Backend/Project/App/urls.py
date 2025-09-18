@@ -47,6 +47,12 @@ urlpatterns = [
 
     # admin
     path('admin_dashboard', adminPanel, name='adminPanel' ),
+    #login logout
+    
+    path('login', login_view, name='login_view'),
+    path('logout', logout_view, name='logout_view')
+
+
 
 
 

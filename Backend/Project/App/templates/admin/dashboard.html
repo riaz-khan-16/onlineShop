@@ -15,6 +15,65 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
+    /* 🔑 Profile menu */
+    .profile-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .profile-icon:hover {
+      transform: scale(1.05);
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      overflow: hidden;
+      min-width: 180px;
+      text-align: left;
+    }
+
+    .dropdown p {
+      margin: 0;
+      padding: 12px 16px;
+      font-weight: 500;
+      color: #333;
+      border-bottom: 1px solid #eee;
+    }
+
+    .dropdown a {
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #2575fc;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .dropdown a:hover {
+      background: #f5f5f5;
+    }
+
     .dashboard {
       background: #fff;
       padding: 40px 60px;
@@ -51,6 +110,15 @@
 </head>
 <body>
 
+  <!-- 🔑 Profile dropdown -->
+  <div class="profile-container">
+    <div class="profile-icon" onclick="toggleDropdown()">👤</div>
+    <div class="dropdown" id="dropdownMenu">
+      <p>{{ user.username }}</p>
+      <a href="{% url 'logout_view' %}">Logout</a>
+    </div>
+  </div>
+
   <div class="dashboard">
     <h1>Admin Dashboard</h1>
     <a href="{% url 'shopList' %}">Manage Shops</a>
@@ -58,6 +126,22 @@
     <a href="{% url 'productList' %}">Manage Product Lists</a>
     <a href="{% url 'categoryList' %}">Manage Categories</a>
   </div>
+
+  <script>
+    function toggleDropdown() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    // Close dropdown if clicked outside
+    window.addEventListener("click", function(e) {
+      const menu = document.getElementById("dropdownMenu");
+      const icon = document.querySelector(".profile-icon");
+      if (!menu.contains(e.target) && !icon.contains(e.target)) {
+        menu.style.display = "none";
+      }
+    });
+  </script>
 
 </body>
 </html>

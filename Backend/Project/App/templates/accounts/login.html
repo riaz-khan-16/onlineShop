@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Page layout */
+        body {
+            display: flex;
+            justify-content: center;   /* center horizontally */
+            align-items: center;       /* center vertically */
+            min-height: 100vh;
+            margin: 0;
+            background: #f3f4f6;       /* light gray */
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* Shadow box */
+        .login-box {
+            width: 100%;
+            max-width: 380px;
+            padding: 35px 28px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .login-box h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #111827;
+            font-size: 26px;
+        }
+
+        /* Input groups */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #374151;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .form-group input:focus {
+            border-color: #2563eb;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Login button */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease-in-out, transform 0.1s;
+        }
+
+        .btn:hover {
+            background: #1e40af;
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Extra links */
+        .extra-links {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .extra-links a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>Login</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" required>
+            </div>
+            
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        {% if messages %}
+        <div>
+            {% for message in messages %}
+            <p style="color:red;">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>

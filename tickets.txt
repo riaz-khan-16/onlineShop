@@ -1,5 +1,5 @@
 
-Ticket 6: Add a login system
+Ticket 6: Add a login system [complete]
 Ticket 5: Create a view to add, update, delete shops  [Complete]
 Ticket 4: Create a view to show and update webcontent   [Complete] [18.9.2025]
 Ticket 3: Creat a view for list, create, update, delete category  [Complete] [18.9.2025]
