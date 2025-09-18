@@ -1,0 +1,4 @@
+venv
+Backend\Project\db.sqlite3
+.gitignore
+

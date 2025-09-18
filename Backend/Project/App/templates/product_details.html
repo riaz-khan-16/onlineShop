@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #dddbdb;
+    }
+    .product-container {
+      max-width: 800px;
+      margin: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+    .product-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+    .product-name {
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .product-price {
+      font-size: 16px;
+      color: black;
+      margin: 10px 0;
+    }
+    .product-description {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="product-container" id="product-container">
+  <p>Loading product details...</p>
+</div>
+
+<script>
+  // Get product_id from URL
+  const pathParts = window.location.pathname.split('/');
+  const productId = pathParts[pathParts.length - 2]; // Assuming URL: /product/1/
+
+  // Your API endpoint
+  const apiUrl = `http://127.0.0.1:8000/api/product/{{product_id}}/`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(product => {
+      const container = document.getElementById("product-container");
+      container.innerHTML = `
+        
+        <div class="product-name">${product.name}</div>
+        <div class="product-price">${product.how_to_use}</div>
+      
+        ${product.image1 ? `<img src="${product.image1}" alt="${product.name}" class="product-image">` : ''}
+        <div class="product-description">${product.image_description1}</div>
+
+
+          ${product.image2 ? `<img src="${product.image2}" alt="${product.name}" class="product-image">` : ''}
+        <div class="product-description">${product.image_description1}</div>
+
+          ${product.image2 ? `<img src="${product.image2}" alt="${product.name}" class="product-image">` : ''}
+        <div class="product-description">${product.image_description1}</div>
+      `;
+    })
+    .catch(err => {
+      document.getElementById("product-container").innerHTML = "<p>Error loading product.</p>";
+      console.error(err);
+    });
+</script>
+
+</body>
+</html>

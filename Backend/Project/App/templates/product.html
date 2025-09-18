@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MicroApps</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    /* --- Global Styles --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(270deg, #0f0f0f, #1a1a1a, #222, #0f0f0f);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      color: #fff;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* --- Header --- */
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(0,0,0,0.7);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo-text {
+      font-family: "Pacifico", cursive;
+      font-size: 36px;
+      color: #ff6a00;
+      text-shadow: 2px 2px 12px rgba(0,0,0,0.6);
+    }
+
+    /* --- Tagline Animation --- */
+    .tagline {
+      text-align: center;
+      font-size: 22px;
+      margin: 25px auto;
+      max-width: 800px;
+      color: #ddd;
+      animation: fadeSlide 6s infinite;
+    }
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(15px); }
+      50% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-15px); }
+    }
+
+    /* --- Product Grid --- */
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 40px;
+      max-width: 1500px;
+      margin: auto;
+    }
+
+    /* --- Glassmorphism Card --- */
+    .product-card {
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s ease;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: fadeInUp 0.8s forwards;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(255,255,255,0.2);
+    }
+    @keyframes fadeInUp {
+      0% { transform: translateY(20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* --- Card Gradient Variants --- */
+    .card-variant-1 { background: linear-gradient(135deg, rgba(255,106,0,0.2), rgba(255,193,7,0.15)); }
+    .card-variant-2 { background: linear-gradient(135deg, rgba(33,150,243,0.2), rgba(0,230,118,0.15)); }
+    .card-variant-3 { background: linear-gradient(135deg, rgba(156,39,176,0.2), rgba(233,30,99,0.15)); }
+    .card-variant-4 { background: linear-gradient(135deg, rgba(255,87,34,0.2), rgba(244,67,54,0.15)); }
+
+    /* --- Card Content --- */
+    .product-title {
+      font-size: 26px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #ff6a00, #ee0979);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .product-description {
+      font-size: 15px;
+      color: #ccc;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    /* --- Price Badge --- */
+   .price-badge {
+  margin: 8px 0;               /* smaller vertical spacing */
+  padding: 4px 10px;           /* smaller padding */
+  border-radius: 10px;         /* slightly smaller rounded corners */
+  font-size: 12px;             /* smaller font */
+  font-weight: 600;
+  color: #fff;
+display: inline-block;
+  text-align: center;
+}
+
+
+
+
+    /* --- Links / Buttons --- */
+    .info-link {
+      display: inline-block;
+      margin: 5px 5px 0 0;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #ff6a00, #ee0979);
+      color: #fff;
+      font-weight: 500;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .info-link:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 10px 25px rgba(255,106,0,0.5);
+      background: linear-gradient(90deg, #ee0979, #ff6a00);
+    }
+
+    /* --- Footer --- */
+    footer {
+      margin-top: 50px;
+      padding: 25px 20px;
+      background: rgba(0,0,0,0.8);
+      text-align: center;
+      font-size: 14px;
+      color: #aaa;
+    }
+    footer a {
+      color: #ff6a00;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-text">MicroApps</div>
+  </header>
+
+  <div class="tagline">We create innovative solutions to simplify your life</div>
+
+  <div id="products" class="product-list"></div>
+
+  <footer>
+    &copy; 2025 MicroApps | 
+    <a href="#">Facebook</a> | 
+    <a href="#">Twitter</a> | 
+    <a href="#">Instagram</a>
+  </footer>
+
+  <script>
+    const API_URL = "http://127.0.0.1:8000/api/product/";
+    const variants = ["card-variant-1", "card-variant-2", "card-variant-3", "card-variant-4"];
+
+    async function loadProducts() {
+      try {
+        const response = await fetch(API_URL);
+        const products = await response.json();
+
+        const container = document.getElementById("products");
+        container.innerHTML = "";
+
+        products.forEach((product, index) => {
+          const card = document.createElement("div");
+          card.className = "product-card " + variants[index % variants.length];
+
+          // Determine price badge text
+          const priceText = product.is_free ? "Free" : `$${product.price || "0"}`;
+
+          card.innerHTML = `
+           
+            <div class="product-title">${product.name}</div>
+            <div class="product-description">${product.short_description || "No description available."}</div>
+             <div class="price-badge">${priceText}</div>
+            <a href="http://127.0.0.1:8000/product/${product.id}" target="_blank" class="info-link">What is it</a>
+            <a href="http://127.0.0.1:8000/demo/${product.id}" target="_blank" class="info-link">See demo</a>
+          `;
+
+          container.appendChild(card);
+        });
+
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        document.getElementById("products").innerHTML = "<p>⚠️ Failed to load products.</p>";
+      }
+    }
+
+    loadProducts();
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #dddbdb;
+    }
+    .product-container {
+      max-width: 800px;
+      margin: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+    
+    
+    
+    .product-description {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="product-container" id="product-container">
+  <p>Loading product details...</p>
+</div>
+
+<script>
+  // Get product_id from URL
+  const pathParts = window.location.pathname.split('/');
+  const productId = pathParts[pathParts.length - 2]; // Assuming URL: /product/1/
+
+  // Your API endpoint
+  const apiUrl = `http://127.0.0.1:8000/api/product/{{product_id}}/`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(product => {
+      const container = document.getElementById("product-container");
+      container.innerHTML = `
+
+            <iframe width="800" height="500" 
+                src="${product.youtube_video_link}" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+             </iframe>
+
+      `;
+    })
+    .catch(err => {
+      document.getElementById("product-container").innerHTML = "<p>Error loading product.</p>";
+      console.error(err);
+    });
+</script>
+
+</body>
+</html>
